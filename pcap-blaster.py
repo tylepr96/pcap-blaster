@@ -98,7 +98,6 @@ def SendFuzz(packet):
 	try:
 
 		sock  = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		sock.settimeout(15) # Timeoout to server
 		connect = sock.connect((str(args.ip), int(args.port)))
 		sock.send(packet.decode('hex'))
 		sock.close()
