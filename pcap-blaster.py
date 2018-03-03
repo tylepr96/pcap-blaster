@@ -1,5 +1,6 @@
 import socket
-#logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+import logging
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 try: from scapy.all import *
 except: from scapy import *
 from subprocess import Popen, PIPE
