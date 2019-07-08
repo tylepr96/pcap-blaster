@@ -40,7 +40,6 @@ args = parser.parse_args()
 
 def Fuzz():
 	try:
-		counter = 0
 		print("[!] Fuzzer Starting!")
 		print("[+] Fuzzing IP: %s on Port: %s" % (str(args.ip),str(args.port)))
 		print("[+] Loading PCAP...")
@@ -57,7 +56,6 @@ def Fuzz():
 						p = Popen(radamsa, stdin=PIPE, stdout=PIPE)
 						mutated_data = p.communicate(mutate_me)[0] # Pipe raw packet data into radamsa
 						new_packet = binascii.hexlify(mutated_data)
-						print("[+] Fuzz Count: %s" % str(counter))
 						print("[+] Packet: %s" % str(new_packet.decode("utf-8")))
 						SendFuzz(new_packet) # Sending muated packet
 						counter += 1
@@ -74,6 +72,7 @@ def SendFuzz(packet):
 		connect = sock.connect((str(args.ip), int(args.port)))
 		sock.send(binascii.unhexlify(packet))
 		sock.close()
+		print("[*] Packet Sent")
 	except Exception as e:
 		print("[!] Server is down...")
 		print("[!] Check Counter...")
