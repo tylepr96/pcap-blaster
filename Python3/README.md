@@ -5,7 +5,7 @@ A mutation based fuzzer that mutates the raw data inside a pcap to find potentia
 
 ```usage: pcap-blaster.py [-h]
 
-PCAP-BLASTER - v1.0
+PCAP-BLASTER - v2.0
 Author: Tyler Price
 
 optional arguments:
