@@ -41,11 +41,11 @@ args = parser.parse_args()
 def Fuzz():
 	try:
 		print("[!] Fuzzer Starting!")
-		print("[+] Fuzzing IP: %s on Port: %s" % (str(args.ip),str(args.port)))
-		print("[+] Loading PCAP...")
+		print("[*] Fuzzing IP: %s on Port: %s" % (str(args.ip),str(args.port)))
+		print("[*] Loading PCAP...")
 		pcap = rdpcap(args.i)
 		sessions = pcap.sessions()
-		print("[+] Loading...Done")
+		print("[*] Loading...Done")
 		while True:
 			for session in sessions:
 				for packet in sessions[session]:
@@ -56,7 +56,7 @@ def Fuzz():
 						p = Popen(radamsa, stdin=PIPE, stdout=PIPE)
 						mutated_data = p.communicate(mutate_me)[0] # Pipe raw packet data into radamsa
 						new_packet = binascii.hexlify(mutated_data)
-						print("[+] Packet: %s" % str(new_packet.decode("utf-8")))
+						print("[*] Packet: %s" % str(new_packet.decode("utf-8")))
 						SendFuzz(new_packet) # Sending muated packet
 						counter += 1
 						sleep(float(args.d)) # Delay
