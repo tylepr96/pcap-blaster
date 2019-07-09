@@ -58,7 +58,6 @@ def Fuzz():
 						new_packet = binascii.hexlify(mutated_data)
 						print("[*] Packet: %s" % str(new_packet.decode("utf-8")))
 						SendFuzz(new_packet) # Sending muated packet
-						counter += 1
 						sleep(float(args.d)) # Delay
 					except Exception as e:
 						pass
