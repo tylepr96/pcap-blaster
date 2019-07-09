@@ -74,6 +74,6 @@ def SendFuzz(packet):
 		print("[*] Packet Sent")
 	except Exception as e:
 		print("[!] Server is down...")
-		print("[!] Check Counter...")
+		print("[!] Check Packet...")
 		os.kill(os.getpid(), signal.SIGUSR1)
 Fuzz()
