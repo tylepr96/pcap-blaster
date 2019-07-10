@@ -11,7 +11,7 @@ import signal
 import argparse
 import binascii
 
-radamsa_bin = "/usr/local/Cellar/radamsa/0.5/bin/radamsa"
+radamsa_bin = "/usr/local/Cellar/radamsa/0.5/bin/radamsa" # radamsa path
 
 NAME = "PCAP-BLASTER"
 VERSION = "2.0"
@@ -68,10 +68,16 @@ def Fuzz():
 def SendFuzz(packet):
 	try:
 		sock  = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.settimeout(.5)
 		connect = sock.connect((str(args.ip), int(args.port)))
 		sock.send(binascii.unhexlify(packet))
-		sock.close()
 		print("[*] Packet Sent")
+		try:
+			data = sock.recv(1024)
+			print("[*] Recieved:", data)
+		except:
+			pass
+		sock.close()
 	except Exception as e:
 		print("[!] Server is down...")
 		print("[!] Check Packet...")
